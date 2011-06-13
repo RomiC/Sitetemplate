@@ -12,7 +12,7 @@ define("WORKING_DIR", dirname($_SERVER['SCRIPT_FILENAME']));
 /**
  * WWW-путь к файлам на сервере
  */
-define("WWW_DIR", substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/') - 1));
+define("WWW_DIR", substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/')));
 
 /**
  * Путь к файлу с настройками
@@ -28,6 +28,16 @@ define("ACTIONS_DIR", WORKING_DIR .'/lib/actions');
  * Путь к файлам-классам со страницами
  */
 define("PAGES_DIR", WORKING_DIR .'/lib/pages');
+
+/**
+ * Подключаем Smarty
+ */
+define("SMARTY_DIR", WORKING_DIR .'/lib/smarty/');
+
+/**
+ * Путь к шаблонам страниц
+ */
+define("TEMPLATES_DIR", WORKING_DIR .'/templates');
 
 /**
  * Ассоциативный массив с настройками сайта
@@ -46,6 +56,10 @@ function __autoload($N) {
 		include_once(ACTIONS_DIR ."/{$N}.class.php");
 	elseif (file_exists(PAGES_DIR ."/{$N}.class.php"))
 		include_once(PAGES_DIR ."/{$N}.class.php");
+	elseif (file_exists(SMARTY_DIR ."{$N}.class.php"))
+		include_once(SMARTY_DIR ."{$N}.class.php");
+	elseif (file_exists(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php'))
+		include_once(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php');
 	else
 		throw new Exception("Невозможно подгрузить файл класса {$N}!");
 }

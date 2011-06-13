@@ -6,20 +6,10 @@
  */
 class page1 extends Page {
 	/**
-	 * Функция вывода страницы
+	 * Функция создания страницы
 	 */
-	public function Show() {
-?>
-<html>
-<head>
-	<title>Первая страница</title>
-	<meta charset="UTF-8" />
-</head>
-<body>
-Первая страница сайта!
-</body>
-</html>
-<?php
+	public function Create() {
+		$this->tpl->assign('varr', 'Переменная, заассайненная в методе Create страницы page1!');
 	}
 }
 

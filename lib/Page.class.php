@@ -6,6 +6,12 @@
  */
 abstract class Page {
 	/**
+	 * Объект Smarty
+	 * @var object
+	 
+	private $tpl;*/
+
+	/**
 	 * Функция загрузки класса страницы на основе параметра
 	 * @param string $P имя класса страницы, может содержать только символы английского алфавита и цифры
 	 * @return object объект класса соответвующей страницы
@@ -21,11 +27,31 @@ abstract class Page {
 
 		return new $page;
 	}
-	
+
 	/**
-	 * Виртуальная функция, отвечающая за вывод страницы
+	 * Конструктор
 	 */
-	abstract public function Show();
+	public function __construct() {
+		$this->tpl = new Smarty();
+		$this->tpl->template_dir = TEMPLATES_DIR .'/';
+		$this->tpl->compile_dir = TEMPLATES_DIR .'/compiled/';
+		$this->tpl->config_dir = TEMPLATES_DIR .'/configs/';
+		$this->tpl->cache_dir = TEMPLATES_DIR .'/cache/';
+		
+		$this->tpl->assign('www_dir', WWW_DIR);
+	}
+
+	/**
+	 * Виртуальная функция, отвечающая за наполнение страницы
+	 */
+	abstract public function Create();
+
+	/**
+	 * Функция отображения станицы
+	 */
+	public function Show() {
+		$this->tpl->display(get_class($this) .'.tpl');
+	}
 }
 
 ?>
