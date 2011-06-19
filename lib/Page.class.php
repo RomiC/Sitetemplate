@@ -8,8 +8,8 @@ abstract class Page {
 	/**
 	 * Объект Smarty
 	 * @var object
-	 
-	private $tpl;*/
+	 */
+	protected $tpl;
 
 	/**
 	 * Функция загрузки класса страницы на основе параметра

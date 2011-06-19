@@ -3,8 +3,11 @@
 try {
 	include('bootstrap.php');
 
-	if (isset($_REQUEST['act']) && strlen($_REQUEST['act'])) {
-		// Здесь будет действо!
+	if (isset($_REQUEST['action']) && strlen($_REQUEST['action'])) {
+		$action = Action::GetAction($_REQUEST['action']);
+
+		$action->Take();
+		$action->Callback();
 	} else {
 		if (isset($_REQUEST['page']) && strlen($_REQUEST['page']))
 			$page = Page::GetPage($_REQUEST['page']);
