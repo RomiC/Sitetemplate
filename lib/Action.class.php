@@ -12,6 +12,12 @@ abstract class Action {
 	protected $result;
 
 	/**
+	 * Флажок подключения к БД: true (> 1) - нужно подключение, false (0) - подключение к БД не требуется
+	 * @var bool
+	 */
+	private $requireDB;
+
+	/**
 	 * Статичная функция выбора действия в зависимости от параметра
 	 * @param string $A название действия, может содержать лишь буквы латиницы и цифры
 	 * @return object объект класса соответствующего класса
@@ -20,10 +26,10 @@ abstract class Action {
 		$action = strtolower(trim($A));
 
 		if (preg_match('/[^a-z\d]/', $action))
-			throw new Exception("Неверное действие!");
+			throw new SiteException("Неверное действие!");
 
 		if (!class_exists($action))
-			throw new Exception("Невозможно создать объект класса {$action}!");
+			throw new SiteException("Невозможно создать объект класса {$action}!");
 
 		return new $action;
 	}
@@ -37,6 +43,14 @@ abstract class Action {
 	 * Виртуальная функция обработчика результата
 	 */
 	abstract public function Callback();
+
+	/**
+	 * Метод возвращающий флажок подключения к БД - требуется/не требуется
+	 * @return bool true - если подключение необходимо, иначе - false
+	 */
+	public function RequireDB() {
+		return (bool)$this->requireDB;
+	}
 }
 	
 ?>

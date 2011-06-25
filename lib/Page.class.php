@@ -12,6 +12,12 @@ abstract class Page {
 	protected $tpl;
 
 	/**
+	 * Флажок подключения к БД: true (> 1) - нужно подключение, false (0) - подключение к БД не требуется
+	 * @var bool
+	 */
+	private $requireDB;
+
+	/**
 	 * Функция загрузки класса страницы на основе параметра
 	 * @param string $P имя класса страницы, может содержать только символы английского алфавита и цифры
 	 * @return object объект класса соответвующей страницы
@@ -51,6 +57,14 @@ abstract class Page {
 	 */
 	public function Show() {
 		$this->tpl->display(get_class($this) .'.tpl');
+	}
+
+	/**
+	 * Метод возвращающий флажок подключения к БД - требуется/не требуется
+	 * @return bool true - если подключение необходимо, иначе - false
+	 */
+	public function RequireDB() {
+		return (bool)$this->requireDB;
 	}
 }
 
