@@ -14,7 +14,7 @@ class action1 extends Action {
 		else
 			$this->result = 0.0;
 	}
-	
+
 	/**
 	 * Обработчик результата - вывод в формате JSON
 	 */

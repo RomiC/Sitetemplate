@@ -10,12 +10,6 @@ class Site {
 	 * @var array
 	 */
 	private $settings;
-	
-	/**
-	 * Подключение к БД, ресурс PDO
-	 * @var object
-	 */
-	private $db;
 
 	/**
 	 * Конструктор
@@ -27,7 +21,8 @@ class Site {
 	}
 
 	/**
-	 * Закрытый метод подключения к БД
+	 * Закрытый метод подключения к БД. Создает глобалный объект класса PDO,
+	 * доступный из любого места
 	 */
 	private function ConnectDB() {
 		$host = isset($this->settings['DB']['host']) ? $this->settings['DB']['host'] : 'localhost';
@@ -35,20 +30,24 @@ class Site {
 		$password = isset($this->settings['DB']['password']) ? $this->settings['DB']['password'] : '';
 		$database = isset($this->settings['DB']['database']) ? $this->settings['DB']['database'] : 'test';
 
-		$this->db = new PDO("mysql:host={$host};dbname={$database}", $user, $password);
-		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			// Создаем глобальный объект для доступа к БД
+			$GLOBALS['db'] = new PDO("mysql:host={$host};dbname={$database}", $user, $password);
+			$GLOBALS['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch (PDOException $e) {
+			throw new SiteException($e->getMessage());
+		}
 	}
 
 	/**
 	 * Метод постороение сайта
 	 */
 	function Build() {
+		$this->ConnectDB();
+
 		// В первую очередь выполняем "действия"
 		if (isset($_REQUEST['action']) && strlen($_REQUEST['action'])) {
 			$action = Action::GetAction($_REQUEST['action']);
-
-			if ($action->RequireDB())
-				$this->ConnectDB();
 
 			$action->Take();
 			$action->Callback();
@@ -57,10 +56,6 @@ class Site {
 				$page = Page::GetPage($_REQUEST['page']);
 			else
 				$page = Page::GetPage($settings['Pages']['default']);
-
-
-			if ($page->RequireDB())
-				$this->ConnectDB();
 
 			$page->Create();
 			$page->Show();

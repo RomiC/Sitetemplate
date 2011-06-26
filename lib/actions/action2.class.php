@@ -10,15 +10,7 @@ class action2 extends Action {
 	 */
 	public function Take() {
 		try {
-			global $settings;
-			$host = isset($settings['DB']['host']) ? $settings['DB']['host'] : 'localhost';
-			$user = isset($settings['DB']['user']) ? $settings['DB']['user'] : 'root';
-			$password = isset($settings['DB']['password']) ? $settings['DB']['password'] : '';
-			$database = isset($settings['DB']['database']) ? $settings['DB']['database'] : 'test';
-
-			$db = new PDO("mysql:host={$host};dbname={$database}", $user, $password);
-			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+			global $db;
 			$query = $db->prepare('INSERT INTO `requests` (`ip`, `date`) VALUES (INET_ATON(?), NOW())');
 			$query->bindParam(1, $_SERVER['REMOTE_ADDR']);
 
