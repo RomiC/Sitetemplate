@@ -12,7 +12,7 @@ define("WORKING_DIR", dirname($_SERVER['SCRIPT_FILENAME']));
 /**
  * WWW-путь к файлам на сервере
  */
-define("WWW_DIR", substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/')));
+define("WWW_DIR", "http://{$_SERVER['HTTP_HOST']}" .substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/')));
 
 /**
  * Путь к файлу с настройками
