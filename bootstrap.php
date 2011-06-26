@@ -61,7 +61,7 @@ function __autoload($N) {
 	elseif (file_exists(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php'))
 		include_once(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php');
 	else
-		throw new Exception("Невозможно подгрузить файл класса {$N}!");
+		throw new SiteException("Невозможно подгрузить файл класса {$N}!");
 }
 
 ?>
