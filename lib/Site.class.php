@@ -108,7 +108,7 @@ class SiteException extends Exception {
 		$tpl->cache_dir = TEMPLATES_DIR .'/cache/';
 
 		$tpl->assign(array(
-			'type' => $this->type,
+			'www_dir' => WWW_DIR,
 			'desc' => $this->desc
 		));
 		$tpl->display('epicfailed.tpl');
