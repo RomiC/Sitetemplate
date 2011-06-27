@@ -21,25 +21,6 @@ class Site {
 	}
 
 	/**
-	 * Закрытый метод подключения к БД. Создает глобалный объект класса PDO,
-	 * доступный из любого места
-	 */
-	private function ConnectDB() {
-		$host = isset($this->settings['DB']['host']) ? $this->settings['DB']['host'] : 'localhost';
-		$user = isset($this->settings['DB']['user']) ? $this->settings['DB']['user'] : 'root';
-		$password = isset($this->settings['DB']['password']) ? $this->settings['DB']['password'] : '';
-		$database = isset($this->settings['DB']['database']) ? $this->settings['DB']['database'] : 'test';
-
-		try {
-			// Создаем глобальный объект для доступа к БД
-			$GLOBALS['db'] = new PDO("mysql:host={$host};dbname={$database}", $user, $password);
-			$GLOBALS['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
-			throw new SiteException($e->getMessage());
-		}
-	}
-
-	/**
 	 * Метод постороение сайта
 	 */
 	function Build() {
@@ -53,9 +34,9 @@ class Site {
 			$action->Callback();
 		} else { // И только если делать нечего, то показываем страницу
 			if (isset($_REQUEST['page']) && strlen($_REQUEST['page']))
-				$page = Page::GetPage($_REQUEST['page']);
+				$page = PagesFactory::GetPage($_REQUEST['page']);
 			else
-				$page = Page::GetPage($this->settings['Pages']['default']);
+				$page = PagesFactory::GetPage($this->settings['Pages']['default']);
 
 			$page->Create();
 			$page->Show();

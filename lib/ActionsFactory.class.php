@@ -2,15 +2,9 @@
 
 /** 
  * Абстрактный класс, описывающий действия пользователя
- * @author Роман Чаругин <roman-charugin@ya.ru>
+ * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
-abstract class Action {
-	/**
-	 * Результат операции
-	 * @var mixed 
-	 */
-	protected $result;
-
+abstract class ActionsFactory {
 	/**
 	 * Статичная функция выбора действия в зависимости от параметра
 	 * @param string $A название действия, может содержать лишь буквы латиницы и цифры
@@ -27,16 +21,6 @@ abstract class Action {
 
 		return new $action;
 	}
-	
-	/**
-	 * Виртуальная функция выполнения действия
-	 */
-	abstract public function Take();
-	
-	/**
-	 * Виртуальная функция обработчика результата
-	 */
-	abstract public function Callback();
 }
 	
 ?>

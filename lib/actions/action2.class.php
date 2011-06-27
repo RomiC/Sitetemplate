@@ -2,13 +2,13 @@
 
 /**
  * Действие #2 - Запрос к БД и редирект на страницу 1
- * @author Роман Чаругин <roman-charugin@ya.ru>
+ * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
 class action2 extends Action {
 	/**
 	 * Запрос к БД
 	 */
-	public function Take() {
+	public function Run() {
 		try {
 			global $db;
 			$query = $db->prepare('INSERT INTO `requests` (`ip`, `date`) VALUES (INET_ATON(?), NOW())');
