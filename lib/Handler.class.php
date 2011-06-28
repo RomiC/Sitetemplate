@@ -5,18 +5,18 @@
  * 
  * @author Собканюк Андрей <4apay@mail.ru>, Нечаев Ярослав <nechaev@expertkey.ru>
  */
-abstract class Handler {
+class Handler {
 	//Список зависимостей этого класса от подключаемых модулей
-	abstract private $dependency;
+	private $dependency;
 	//Список категорий пользователей, которым доступно выполнение данного экшена
-	abstract private $access;
+	private $access;
 	
 	/**
 	 * Геттер для dependency
 	 * 
 	 * @return array Список зависимостей этого класса от подключаемых модулей
 	 */
-	public function getDependencies() {
+	public function GetDependencies() {
 		return $this->dependency;
 	}
 	
@@ -25,7 +25,7 @@ abstract class Handler {
 	 * 
 	 * @return array Список категорий пользователей, которым доступно выполнение данного экшена
 	 */
-	public function getAccess() {
+	public function GetAccess() {
 		return $this->access;
 	} 
 }

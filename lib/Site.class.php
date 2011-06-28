@@ -24,13 +24,11 @@ class Site {
 	 * Метод постороение сайта
 	 */
 	function Build() {
-		$this->ConnectDB();
-
 		// В первую очередь выполняем "действия"
 		if (isset($_REQUEST['action']) && strlen($_REQUEST['action'])) {
 			$action = Action::GetAction($_REQUEST['action']);
 
-			$action->Take();
+			$action->Run();
 			$action->Callback();
 		} else { // И только если делать нечего, то показываем страницу
 			if (isset($_REQUEST['page']) && strlen($_REQUEST['page']))
@@ -38,7 +36,7 @@ class Site {
 			else
 				$page = PagesFactory::GetPage($this->settings['Pages']['default']);
 
-			$page->Create();
+			$page->Generate();
 			$page->Show();
 		}
 	}
@@ -73,7 +71,7 @@ class SiteException extends Exception {
 		$log = fopen(WORKING_DIR .'/log/'. date('Y-m-d') .'.log', 'a');
 
 		if ($log) {
-			fwrite($log, date('H:i:s') ." :: {$this->type} :: {$this->desc}\n\r");
+			fwrite($log, date('H:i:s') ." :: {$this->getFile()} ({$this->getLine()}) :: {$this->desc}\n\r");
 			fclose($log);
 		}
 	}
