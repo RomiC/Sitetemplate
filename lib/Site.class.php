@@ -26,7 +26,7 @@ class Site {
 	function Build() {
 		// В первую очередь выполняем "действия"
 		if (isset($_REQUEST['action']) && strlen($_REQUEST['action'])) {
-			$action = Action::GetAction($_REQUEST['action']);
+			$action = ActionsFactory::GetAction($_REQUEST['action']);
 
 			$action->Run();
 			$action->Callback();
