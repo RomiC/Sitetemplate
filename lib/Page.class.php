@@ -27,7 +27,7 @@ abstract class Page {
 	/**
 	 * Виртуальная функция, отвечающая за наполнение страницы
 	 */
-	abstract public function Generete();
+	abstract public function Generate();
 
 	/**
 	 * Функция отображения станицы
