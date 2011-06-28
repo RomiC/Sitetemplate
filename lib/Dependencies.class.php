@@ -4,21 +4,13 @@
  * Класс, отвечающий за зависимости
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
-class Dependences {
+class Dependencies {
 	/**
 	 * Конструктор
 	 * @param $dependences Массив зависимостей
 	 */
-	public function __construct($dependences) {
-		
-		/**
-		 * если передается строка
-		 * в каком виде вы обычно передаете параметры в строке?
-		 * предположим что через точку с запятой
-		 * $dependences = eplode(';', strtolower(trim($dependences)));
-		 */
-		
-		foreach($dependences AS $dependency) {
+	public function __construct($dependencies) {
+		foreach($dependencies AS $dependency) {
 			switch ($dependency) {
 				case 'mysql':
 					$GLOBALS['mysql'] = mysql_connect("localhost", "root", "password");

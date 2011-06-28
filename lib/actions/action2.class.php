@@ -5,6 +5,9 @@
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
 class action2 extends Action {
+	private $dependency = array("mysql");
+	private $access = array("both");
+	
 	/**
 	 * Запрос к БД
 	 */

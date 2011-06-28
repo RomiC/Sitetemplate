@@ -4,7 +4,7 @@
  * Абстрактный класс, описывающий страницы сайта
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
-abstract class Page {
+abstract class Page extends Handler {
 	/**
 	 * Объект Smarty
 	 * @var object
