@@ -6,10 +6,17 @@
  * @author Собканюк Андрей <4apay@mail.ru>, Нечаев Ярослав <nechaev@expertkey.ru>
  */
 class Handler {
-	//Список зависимостей этого класса от подключаемых модулей
-	private $dependency;
-	//Список категорий пользователей, которым доступно выполнение данного экшена
-	private $access;
+	/**
+	 * Список зависимостей
+	 * @var mixed
+	 */
+	protected $dependencies;
+
+	/**
+	 * Список категорий пользователей, которым доступно выполнение данного экшена
+	 * @var mixed
+	 */
+	protected $access;
 	
 	/**
 	 * Геттер для dependency
@@ -17,7 +24,7 @@ class Handler {
 	 * @return array Список зависимостей этого класса от подключаемых модулей
 	 */
 	public function GetDependencies() {
-		return $this->dependency;
+		return $this->dependencies;
 	}
 	
 	/**

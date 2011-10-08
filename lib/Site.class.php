@@ -28,6 +28,8 @@ class Site {
 		if (isset($_REQUEST['action']) && strlen($_REQUEST['action'])) {
 			$action = ActionsFactory::GetAction($_REQUEST['action']);
 
+			Dependencies::Init($action->GetDependencies(), $this->settings);
+
 			$action->Run();
 			$action->Callback();
 		} else { // И только если делать нечего, то показываем страницу
@@ -35,6 +37,8 @@ class Site {
 				$page = PagesFactory::GetPage($_REQUEST['page']);
 			else
 				$page = PagesFactory::GetPage($this->settings['Pages']['default']);
+
+			Dependencies::Init($page->GetDependencies(), $this->settings);
 
 			$page->Generate();
 			$page->Show();

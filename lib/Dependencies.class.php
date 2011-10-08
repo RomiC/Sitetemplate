@@ -6,21 +6,24 @@
  */
 class Dependencies {
 	/**
-	 * Конструктор
-	 * @param $dependences Массив зависимостей
+	 * Инициализация зависимостей
+	 * @param mixed $dependences Массив (или строка) зависимостей
+	 * @param array $settings Массив настроек
 	 */
-	public function __construct($dependencies) {
-		foreach($dependencies AS $dependency) {
-			switch ($dependency) {
-				case 'mysql':
-					$GLOBALS['mysql'] = mysql_connect("localhost", "root", "password");
-					break;
-				case 'smarty':
-					$GLOBALS['smarty'] = new Smarty();
+	public static function Init($dependencies, $settings) {
+		if (is_string($dependencies))
+			$deps = explode(',', $dependencies);
+		else
+			$deps = $dependencies;
+
+		foreach($deps AS $dependence) {
+			switch ($dependence) {
+				case 'db':
+					$GLOBALS[$dependence] = mysql_connect($settings['DB']['host'], $settings['DB']['user'], $settings['DB']['password']);
 					break;
 				default:
 					// Надо подумать!
-					$GLOBALS[$d] = false; // Подумать трижды!!!
+					$GLOBALS[$dependence] = false; // Подумать трижды!!!
 			}
 		}
 	}
