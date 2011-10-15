@@ -13,8 +13,10 @@ class Dependencies {
 	public static function Init($dependencies, $settings) {
 		if (is_string($dependencies))
 			$deps = explode(',', $dependencies);
-		else
+		elseif (is_array($dependencies))
 			$deps = $dependencies;
+		else
+			return false;
 
 		foreach($deps AS $dependence) {
 			switch ($dependence) {
