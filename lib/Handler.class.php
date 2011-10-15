@@ -52,4 +52,5 @@ class Handler {
 				$params[$key] = $val;
 		return $params;
 	}
+
 }
