@@ -1,0 +1,3 @@
+<Files ~ "(settings\.ini|README)">
+Deny from all
+</Files>
