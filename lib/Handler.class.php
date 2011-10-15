@@ -17,7 +17,7 @@ class Handler {
 	 * @var mixed
 	 */
 	protected $access;
-	
+
 	/**
 	 * Геттер для dependency
 	 * 
@@ -26,7 +26,7 @@ class Handler {
 	public function GetDependencies() {
 		return $this->dependencies;
 	}
-	
+
 	/**
 	 * Геттер для access;
 	 * 
@@ -34,5 +34,18 @@ class Handler {
 	 */
 	public function GetAccess() {
 		return $this->access;
-	} 
+	}
+	
+	/**
+	 * Метод для получения "чистого" списка параметров запроса
+	 * @return array Ассоциативный массив параметров
+	 */
+	protected function GetParams() {
+		$main_params = array('page', 'action');
+		$params = array();
+		foreach(array_merge($_GET, $_POST) AS $key => $val)
+			if (!in_array($key, $main_params))
+				$params[$key] = $val;
+		return $params;
+	}
 }
