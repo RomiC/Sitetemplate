@@ -75,7 +75,7 @@ class SiteException extends Exception {
 		$log = fopen(WORKING_DIR .'/log/'. date('Y-m-d') .'.log', 'a');
 
 		if ($log) {
-			fwrite($log, date('H:i:s') ." :: {$this->getFile()} ({$this->getLine()}) :: {$this->desc}\n\r");
+			fwrite($log, date('H:i:s') ." :: {$this->getFile()} ({$this->getLine()}) :: {$this->desc}\r\n");
 			fclose($log);
 		}
 	}
