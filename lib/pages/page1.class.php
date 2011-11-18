@@ -1,10 +1,12 @@
 <?php
 
+namespace Page;
+
 /**
  * Первая страница сайта
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
-class page1 extends Page {
+class page1 extends \Page {
 	/**
 	 * Массив зависимостей для конкретной страницы
 	 * @var mixed
@@ -15,7 +17,9 @@ class page1 extends Page {
 	 * Функция создания страницы
 	 */
 	public function Generate() {
-		$this->tpl->assign('varr', 'Переменная, заассайненная в методе Create страницы page1!');
+		global $db;
+		$q = $db->query('SELECT `about` FROM users');
+		$this->tpl->assign('varr', nl2br(print_r($q->fetchAll(\PDO::FETCH_ASSOC), true)));
 	}
 }
 

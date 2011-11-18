@@ -1,12 +1,14 @@
 <?php
 
+namespace Action;
+
 /**
  * Действие #2 - Запрос к БД и редирект на страницу 1
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
-class action2 extends Action {
-	private $dependency = array("mysql");
-	private $access = array("both");
+class action2 extends \Action {
+	protected $dependency = 'db';
+	protected $access = 'both';
 	
 	/**
 	 * Запрос к БД
@@ -28,9 +30,9 @@ class action2 extends Action {
 	 */
 	public function CallBack() {
 		if ($this->result === true)
-			header("Location: index.php?page=page1");
+			header('Location: index.php?page=page1');
 		else
-			header("Location: index.php?page=page2");
+			header('Location: index.php?page=page2');
 	}
 }
 

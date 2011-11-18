@@ -10,7 +10,7 @@ abstract class Action extends Handler {
 	 * @var mixed 
 	 */
 	protected $result;
-	
+
 	/**
 	 * Виртуальная функция выполнения действия
 	 */

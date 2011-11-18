@@ -1,10 +1,12 @@
 <?php
 
+namespace Action;
+
 /**
  * Действие номер раз - простая арифметическая операция и вывод результата в формате JSON
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
-class action1 extends Action {
+class action1 extends \Action {
 	/**
 	 * Сама арифметичекая опреация - возведение в квадрат
 	 */

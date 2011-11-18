@@ -18,14 +18,22 @@ class Dependencies {
 		else
 			return false;
 
-		foreach($deps AS $dependence) {
-			switch ($dependence) {
+		foreach($deps AS $d) {
+			switch ($d) {
 				case 'db':
-					$GLOBALS[$dependence] = mysql_connect($settings['DB']['host'], $settings['DB']['user'], $settings['DB']['password']);
+					$dbsn = "mysql:dbname={$settings['DB']['database']};host={$settings['DB']['host']}";
+
+					try {
+						$GLOBALS[$d] = new \PDO($dbsn, $settings['DB']['user'], $settings['DB']['password']);
+						$GLOBALS[$d]->query("SET NAMES '{$settings['DB']['encoding']}';");
+					} catch (PDOException $e) {
+						throw new SiteException($e->getMessage());
+					}
+
 					break;
 				default:
 					// Надо подумать!
-					$GLOBALS[$dependence] = false; // Подумать трижды!!!
+					$GLOBALS[$d] = false; // Подумать трижды!!!
 			}
 		}
 	}

@@ -16,6 +16,9 @@ abstract class ActionsFactory {
 		if (preg_match('/[^a-z\d]/', $action))
 			throw new SiteException("Неверное действие!");
 
+		// Добавляем соответствующий namespace
+		$action = 'Action\\'. $action;
+
 		if (!class_exists($action))
 			throw new SiteException("Невозможно создать объект класса {$action}!");
 

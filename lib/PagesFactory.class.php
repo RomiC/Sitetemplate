@@ -16,6 +16,9 @@ abstract class PagesFactory {
 		if (preg_match('/[^a-z\d]/', $page))
 			throw new SiteException("Неверное имя страницы!");
 
+		// Добавляем соответствующий namespace
+		$page = 'Page\\'. $page;
+
 		if (!class_exists($page))
 			throw new SiteException("Невозможно создать объект класса {$page}!");
 

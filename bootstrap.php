@@ -50,6 +50,10 @@ $settings = parse_ini_file(SETTINGS, true);
  * @param string $N имя класса
  */
 function __autoload($N) {
+	$backslash = strrpos($N, '\\');
+	if ($backslash)
+		$N = substr($N, $backslash + 1);
+
 	if (file_exists(WORKING_DIR ."/lib/{$N}.class.php"))
 		include_once(WORKING_DIR ."/lib/{$N}.class.php");
 	elseif (file_exists(ACTIONS_DIR ."/{$N}.class.php"))
