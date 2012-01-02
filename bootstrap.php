@@ -51,18 +51,20 @@ $settings = parse_ini_file(SETTINGS, true);
  */
 function __autoload($N) {
 	$backslash = strrpos($N, '\\');
-	if ($backslash)
+	if ($backslash) {
+		$ns = substr($N, 0, $backslash);
 		$N = substr($N, $backslash + 1);
-
-	if (file_exists(WORKING_DIR ."/lib/{$N}.class.php"))
+	}
+	
+	if (!isset($ns) && file_exists(WORKING_DIR ."/lib/{$N}.class.php"))
 		include_once(WORKING_DIR ."/lib/{$N}.class.php");
-	elseif (file_exists(ACTIONS_DIR ."/{$N}.class.php"))
+	elseif (isset($ns) && $ns == 'Action' && file_exists(ACTIONS_DIR ."/{$N}.class.php"))
 		include_once(ACTIONS_DIR ."/{$N}.class.php");
-	elseif (file_exists(PAGES_DIR ."/{$N}.class.php"))
+	elseif (isset($ns) && $ns == 'Page' && file_exists(PAGES_DIR ."/{$N}.class.php"))
 		include_once(PAGES_DIR ."/{$N}.class.php");
-	elseif (file_exists(SMARTY_DIR ."{$N}.class.php"))
+	elseif (!isset($ns) && file_exists(SMARTY_DIR ."{$N}.class.php"))
 		include_once(SMARTY_DIR ."{$N}.class.php");
-	elseif (file_exists(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php'))
+	elseif (!isset($ns) && file_exists(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php'))
 		include_once(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php');
 	else
 		throw new SiteException("Невозможно подгрузить файл класса {$N}!");
