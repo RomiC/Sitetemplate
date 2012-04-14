@@ -19,7 +19,7 @@ class page1 extends \Page {
 	public function Generate() {
 		global $db;
 		$q = $db->query('SELECT `about` FROM users');
-		$this->tpl->assign('varr', nl2br(print_r($q->fetchAll(\PDO::FETCH_ASSOC), true)));
+		$this->tpl->assign('varr', nl2br(print_r(array('uno', 'duos', 'tres'), true)));
 	}
 }
 

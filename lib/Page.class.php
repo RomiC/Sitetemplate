@@ -18,7 +18,6 @@ abstract class Page extends \Handler {
 		$this->tpl = new \Smarty();
 		$this->tpl->template_dir = TEMPLATES_DIR .'/';
 		$this->tpl->compile_dir = TEMPLATES_DIR .'/compiled/';
-		$this->tpl->config_dir = TEMPLATES_DIR .'/configs/';
 		$this->tpl->cache_dir = TEMPLATES_DIR .'/cache/';
 
 		$this->tpl->assign('www_dir', WWW_DIR);
