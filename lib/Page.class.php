@@ -6,6 +6,18 @@
  */
 abstract class Page extends \Handler {
 	/**
+	 * Заголовок страницы
+	 * @var string
+	 */
+	protected $header;
+
+	/**
+	 * Название шаблона страницы
+	 * @var string
+	 */
+	protected $tpl_name;
+
+	/**
 	 * Объект Smarty
 	 * @var object
 	 */
@@ -20,7 +32,12 @@ abstract class Page extends \Handler {
 		$this->tpl->compile_dir = TEMPLATES_DIR .'/compiled/';
 		$this->tpl->cache_dir = TEMPLATES_DIR .'/cache/';
 
-		$this->tpl->assign('www_dir', WWW_DIR);
+		if (empty($this->tpl_name))	{	// Если имя шаблона не задано явно,
+			// то создадим его на основе имени класса
+			$class_name = get_class($this);
+			// Избавляемся от неймспейса в имени шаблона
+			$this->tpl_name = substr($class_name, strrpos($class_name, '\\') + 1);
+		}
 	}
 
 	/**
@@ -32,12 +49,18 @@ abstract class Page extends \Handler {
 	 * Функция отображения станицы
 	 */
 	public function Show() {
-		$tpl_name = get_class($this);
+		global $settings;
 
-		// Избавляемся от неймспейса в имени шаблона
-		$tpl_name = substr($tpl_name, strrpos($tpl_name, '\\') + 1);
+		$this->tpl->assign(array(
+			// Путь к корню сайта
+			'www_dir' => WWW_DIR,
+			// Имя шаблона страницы
+			'_name' => $this->tpl_name,
+			// Заголовок страницы
+			'_header' => $settings['Site']['name'] . (!empty($this->header) ? " :: {$this->header}" : '')
+		));
 
-		$this->tpl->display("{$tpl_name}.tpl");
+		$this->tpl->display("{$this->tpl_name}.tpl");
 	}
 }
 

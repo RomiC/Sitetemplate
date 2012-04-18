@@ -14,6 +14,12 @@ class page1 extends \Page {
 	protected $dependencies = 'db';
 
 	/**
+	 * Заголовок страницы
+	 * @var string
+	 */
+	protected $header = 'Первая';
+
+	/**
 	 * Функция создания страницы
 	 */
 	public function Generate() {
