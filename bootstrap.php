@@ -12,7 +12,7 @@ define("WORKING_DIR", dirname($_SERVER['SCRIPT_FILENAME']));
 /**
  * WWW-путь к файлам на сервере
  */
-define("WWW_DIR", substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/')));
+define("WWW_DIR", "http://{$_SERVER['HTTP_HOST']}" .substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/')));
 
 /**
  * Путь к файлу с настройками
@@ -50,18 +50,24 @@ $settings = parse_ini_file(SETTINGS, true);
  * @param string $N имя класса
  */
 function __autoload($N) {
-	if (file_exists(WORKING_DIR ."/lib/{$N}.class.php"))
+	$backslash = strrpos($N, '\\');
+	if ($backslash) {
+		$ns = substr($N, 0, $backslash);
+		$N = substr($N, $backslash + 1);
+	}
+	
+	if (!isset($ns) && file_exists(WORKING_DIR ."/lib/{$N}.class.php"))
 		include_once(WORKING_DIR ."/lib/{$N}.class.php");
-	elseif (file_exists(ACTIONS_DIR ."/{$N}.class.php"))
+	elseif (isset($ns) && $ns == 'Action' && file_exists(ACTIONS_DIR ."/{$N}.class.php"))
 		include_once(ACTIONS_DIR ."/{$N}.class.php");
-	elseif (file_exists(PAGES_DIR ."/{$N}.class.php"))
+	elseif (isset($ns) && $ns == 'Page' && file_exists(PAGES_DIR ."/{$N}.class.php"))
 		include_once(PAGES_DIR ."/{$N}.class.php");
-	elseif (file_exists(SMARTY_DIR ."{$N}.class.php"))
+	elseif (!isset($ns) && file_exists(SMARTY_DIR ."{$N}.class.php"))
 		include_once(SMARTY_DIR ."{$N}.class.php");
-	elseif (file_exists(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php'))
+	elseif (!isset($ns) && file_exists(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php'))
 		include_once(SMARTY_DIR .'sysplugins/'. strtolower($N) .'.php');
 	else
-		throw new Exception("Невозможно подгрузить файл класса {$N}!");
+		throw new SiteException("Невозможно подгрузить файл класса {$N}!");
 }
 
 ?>

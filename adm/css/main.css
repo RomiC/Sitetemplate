@@ -1,0 +1,400 @@
+*{
+	margin:0;
+	padding:0;
+}
+	
+html { 
+	
+	background: #fff url(../images/patt.png);
+	color:#000;
+	font-family:arial,sans-serif;
+}
+    
+body{
+	background: #fff url(../images/patt.png);
+	height: 100%;
+	width: 100%;
+}
+	
+#page{
+	/*width: 100%;*/
+	width: 1000px;
+	/*max-width: 1280px;*/
+}
+/*
+h1{
+	font-size:48px;
+	line-height:53px;
+	font-weight:normal;
+	
+}
+*/
+h2 {
+	margin-bottom: 10px;
+}
+
+h3{
+	font-size:16px;
+	line-height:21px;
+	margin-bottom: 5px;
+}	
+
+h4{
+	margin-bottom: 5px;
+}
+h5{
+	margin-bottom: 5px;
+}
+	
+p {
+	font-size:14px;
+	line-height:21px;
+	margin-bottom: 20px;
+}
+p.comment{
+	color: #666666;
+	font-size: 11px;
+	font-style: italic;
+	line-height: 16px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+p.comment span {
+	margin-left: -6px;
+	padding-right: 3px;
+}
+
+a{
+	outline: none;
+}
+
+ul{
+	list-style: none;
+}
+
+.clear{
+	clear:both;
+}
+
+/* -- Icons -- */
+.show_modal{
+	cursor: pointer;
+}
+.icon-calendar{
+	margin-left: 1px;
+}
+
+/* -- Span -- */
+span.price{
+	display: block;
+	margin-bottom: 5px;
+}
+span.weight{
+	display:block;
+	font-style: italic;
+}
+
+span.drop{
+	cursor: pointer;
+}
+span.date{
+	display: block;
+    font-style: italic;
+}
+
+/* -- Inputs -- */
+input[type="text"] {
+	width: 95%;
+}
+input.date{
+	border: none;
+	border-bottom: 1px dotted #CCCCCC;
+	border-radius: 0;
+	box-shadow: none;
+	cursor: pointer;
+	margin-left: 5px;
+	padding: 4px 2px 0;
+	width: 67px;
+}
+input.date + label{
+	margin-top: 10px;
+}
+input.date + input{
+	margin-top: 5px;
+}
+
+textarea {
+	resize: none;
+}
+textarea.small{
+	height: 80px;
+	width: 95%;
+}
+textarea.medium{
+	height: 200px;
+	width: 98%;
+}
+textarea.big{
+	height: 340px;
+	width: 98%;
+}
+textarea.unique {
+	width: 100%;
+	height: 300px;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+	background: #fbfbfb;
+	border-radius: 5px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+	float: right;
+}
+
+.sidebar h3{
+	border-bottom: 1px solid #AAAAAA;
+	color: #999999;
+	margin: 0px 15px;
+	padding: 10px 0;
+}
+
+.sidebar ul{
+	margin: 0 15px;
+	padding: 0;
+}
+.sidebar ul.sub-nav {
+	display: none;
+	margin-right: 0;
+}
+
+.sidebar ul li{
+	padding: 5px 0;
+	position: relative;
+}
+.sidebar ul.nav-list > li{
+	border-top: 1px solid #d8d8d8;
+	padding: 10px 0;
+}
+.sidebar ul.nav-list > li:first-child{
+	border-top: none;
+}
+.sidebar ul.sub-nav > li:last-child{
+	padding-bottom: 0;
+}
+
+
+.sidebar ul li a{
+	margin: 0;
+	padding: 0 30px 0 0;
+}
+.sidebar ul.nav-list > li > a{
+	padding-right: 55px;
+}
+.sidebar ul li.active > a{
+	color: #005580;
+}
+.sidebar a:hover{
+	text-decoration: none;
+}
+
+.sidebar .caret{
+	border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #000000;
+	margin: 6px 0 0 5px;
+}
+.sidebar .caret.active {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #000000;
+    margin: 8px 0 0 5px;
+}
+
+/* -- control --*/
+.sidebar li > .control{
+	opacity: 0.5;
+	right: 0;
+}
+.sidebar ul.nav-list > li > .control.edit {
+	top: 10px;
+	width: 50px;
+}
+.sidebar ul.sub-nav > li > .control.edit {
+	top: 5px;
+	width: 33px;
+}
+
+/* --- add category -- */
+.sidebar > a{
+	background: #463429;
+	border-top: #666666;
+	border-radius: 0 0 5px 5px;
+	color: #FFFFFF;
+	display: block;
+	padding: 10px 15px;
+	text-align: center;
+}
+
+
+/* ----- HEADER ----- */
+#header{
+	padding: 20px 4% 0;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+#logo {
+	float: left;
+	margin-top: -6px;
+}
+
+#header .nav{
+	border-bottom: none;
+	color: #FFFFFF;
+	margin: 0 0 -1px 190px;
+	overflow: hidden;
+	padding: 0 10px;
+}
+
+#header .nav a{
+	color: #FFFFFF;
+	margin: 0;
+}
+#header .nav a:hover{
+	background-color: #eeeeee;
+	color: #555555;
+}
+
+#header .nav .active{
+	box-shadow: 0px 10px 10px rgba(0,0,0,0.57);
+}
+#header .nav .active a{
+	color: #555555;
+}
+
+/* ----- CONTENT ----- */
+#content {
+	background: #FFFFFF;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.57);
+	padding: 30px 4%;
+}
+
+#content .article{
+	float: left;
+	margin: 0;
+}
+
+.row {
+	margin-bottom: 10px;
+	padding: 10px 0;
+	position: relative;
+}
+.row:hover {
+	background: #f7fafb;
+	
+}
+
+.row.active h3, .row.new h3{
+	color: #FF6600;
+}
+.row.active .name h4, .row.new .name h4{
+	color: #ba4a00;
+}
+
+.hiddn *{
+	color: #999;
+}
+.hiddn img{
+	opacity: 0.5;
+}
+
+/* ----- MODAL ----- */
+.modal {
+	width: 600px;
+}
+
+.modal form{
+	margin: 0;
+}
+.modal h3{
+	margin: 0;
+}
+.modal hr{
+	margin: 10px 0;
+}
+
+.modal .row{
+	margin-bottom: 20px;
+	padding: 0;
+}
+.modal .row:last-child{
+	margin-bottom: 0;
+}
+.modal .row:hover{
+	background: none;
+}
+.modal .left{
+	float: left;
+}
+.modal .right{
+	float: right;
+}
+
+.modal .input-append{
+	width: 100%;
+}
+.modal .input-append input{
+	width: 78%;
+}
+.modal .input-append span{
+	width: 12%;
+}
+
+.modal .span3{
+	width: 220px;
+}
+.modal .span4{
+	width: 300px;
+}
+.modal .span7{
+	width: 540px;
+}
+
+.modal .time {
+	float: left;
+	width: 80px;
+}
+.modal .time input{
+	width: 50px;
+}
+.modal .time + label{
+	margin: 5px 0 0 170px;
+	padding-top: 7px;
+}
+
+/* -- loader -- */
+.modal-body #loader {
+	background: url('../images/ajax-loader.gif') center center no-repeat;
+	height: 50px;
+	width: 100%;
+}
+
+/* -- error -- */
+.modal .alert{
+	border-radius: 0;
+	box-shadow: 0 1px 2px rgba(0,0,0,.75);
+	position: absolute;
+	top: -55px;
+	left: 0;
+	right: 0;
+	z-index: 2;
+}
+
+.modal .alert ul{
+	margin-bottom: 0;
+}
+
+/* -- upload -- */
+.modal .upload {
+	background-position: center center;
+	background-repeat: no-repeat;
+}

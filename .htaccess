@@ -1,0 +1,6 @@
+<Files ~ "(settings\.ini|README)">
+Deny from all
+</Files>
+
+AddDefaultCharset utf-8
+DirectoryIndex index.php

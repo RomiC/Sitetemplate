@@ -2,9 +2,21 @@
 
 /**
  * Абстрактный класс, описывающий страницы сайта
- * @author Роман Чаругин <roman-charugin@ya.ru>
+ * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
-abstract class Page {
+abstract class Page extends \Handler {
+	/**
+	 * Заголовок страницы
+	 * @var string
+	 */
+	protected $header;
+
+	/**
+	 * Название шаблона страницы
+	 * @var string
+	 */
+	protected $tpl_name;
+
 	/**
 	 * Объект Smarty
 	 * @var object
@@ -12,45 +24,43 @@ abstract class Page {
 	protected $tpl;
 
 	/**
-	 * Функция загрузки класса страницы на основе параметра
-	 * @param string $P имя класса страницы, может содержать только символы английского алфавита и цифры
-	 * @return object объект класса соответвующей страницы
-	 */
-	public static function GetPage($P) {
-		$page = strtolower(trim($P));
-
-		if (preg_match('/[^a-z\d]/', $page))
-			throw new Exception("Неверное имя страницы!");
-
-		if (!class_exists($page))
-			throw new Exception("Невозможно создать объект класса {$page}!");
-
-		return new $page;
-	}
-
-	/**
 	 * Конструктор
 	 */
 	public function __construct() {
-		$this->tpl = new Smarty();
+		$this->tpl = new \Smarty();
 		$this->tpl->template_dir = TEMPLATES_DIR .'/';
 		$this->tpl->compile_dir = TEMPLATES_DIR .'/compiled/';
-		$this->tpl->config_dir = TEMPLATES_DIR .'/configs/';
 		$this->tpl->cache_dir = TEMPLATES_DIR .'/cache/';
-		
-		$this->tpl->assign('www_dir', WWW_DIR);
+
+		if (empty($this->tpl_name))	{	// Если имя шаблона не задано явно,
+			// то создадим его на основе имени класса
+			$class_name = get_class($this);
+			// Избавляемся от неймспейса в имени шаблона
+			$this->tpl_name = substr($class_name, strrpos($class_name, '\\') + 1);
+		}
 	}
 
 	/**
 	 * Виртуальная функция, отвечающая за наполнение страницы
 	 */
-	abstract public function Create();
+	abstract public function Generate();
 
 	/**
 	 * Функция отображения станицы
 	 */
 	public function Show() {
-		$this->tpl->display(get_class($this) .'.tpl');
+		global $settings;
+
+		$this->tpl->assign(array(
+			// Путь к корню сайта
+			'www_dir' => WWW_DIR,
+			// Имя шаблона страницы
+			'_name' => $this->tpl_name,
+			// Заголовок страницы
+			'_header' => $settings['Site']['name'] . (!empty($this->header) ? " :: {$this->header}" : '')
+		));
+
+		$this->tpl->display("{$this->tpl_name}.tpl");
 	}
 }
 
