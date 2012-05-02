@@ -1,4 +1,4 @@
-<Files ~ "(settings\.ini|README)">
+<Files ~ "(settings\.ini|README|\.htaccess)">
 Deny from all
 </Files>
 
