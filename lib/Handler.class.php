@@ -56,16 +56,17 @@ class Handler {
 	/**
 	 * Метод для получения конкретного параметра из запроса
 	 * @param string $name Имя параметра
+	 * @param mixed $byDefault Значение по умолчанию, которое будет возвращено, если текущее значение empty
 	 * @return string|null Значение параметра, либо null в случае если такого параметра не существует, либо он пуст
 	 */
-	protected function GetParam($name) {
+	protected function GetParam($name, $byDefault = null) {
 		if (!empty($_POST[$name]))
 			return $_POST[$name];
 
 		if (!empty($_GET[$name]))
 			return $_GET[$name];
 
-		return null;
+		return $byDefault;
 	}
 
 	/**
