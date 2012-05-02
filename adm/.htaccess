@@ -1,0 +1,6 @@
+<Files ~ "(settings\.ini|\.htaccess)">
+Deny from all
+</Files>
+
+AddDefaultCharset utf-8
+DirectoryIndex index.php
