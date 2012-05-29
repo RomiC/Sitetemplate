@@ -1,13 +1,13 @@
 <?php
 
-/** 
+/**
  * Абстрактный класс, описывающий действия пользователя
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
 abstract class Action extends Handler {
 	/**
 	 * Результат операции
-	 * @var mixed 
+	 * @var mixed
 	 */
 	protected $result;
 
@@ -15,11 +15,11 @@ abstract class Action extends Handler {
 	 * Виртуальная функция выполнения действия
 	 */
 	abstract public function Run();
-	
+
 	/**
 	 * Виртуальная функция обработчика результата
 	 */
 	abstract public function Callback();
 }
-	
+
 ?>
