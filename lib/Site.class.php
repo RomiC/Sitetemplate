@@ -41,8 +41,9 @@ class Site {
 	function Build() {
 		// Routing (Shubert 29.05.1012)
 			$behavior = array("type"=>"page", "name"=> $this->settings['Pages']['default']);
-			foreach($this->$routing as $path -> $info) {
-				if (preg_match($path,$_SERVER["REQUEST_URI"]) > 0) {
+			foreach($this->routing["paths"] as $path -> $info) {
+				if ($count = preg_match($path,$_GET["path"],$matches) > 0) {
+					if ($count > 1) $_REQUEST['PAGE_PARAMS'] = array_shift($matches);
 					if (isset($info["page"]))
 						$behavior = array("type"=>"page"  , "name"=>$info["page"]  );
 					else
