@@ -9,6 +9,7 @@ class Dependencies {
 	 * Инициализация зависимостей
 	 * @param mixed $dependences Массив (или строка) зависимостей
 	 * @param array $settings Массив настроек
+	 * TODO: Переделать в DAO
 	 */
 	public static function Init($dependencies, $settings) {
 		if (is_string($dependencies))

@@ -1,0 +1,20 @@
+{
+	"paths": {
+		"/"    : {"page": "main"},
+		"/post": {"page": "post"},
+		"/item": {"page": "post"},
+		"/api/catalogue": {"action": "getCatalogue"}
+	},
+
+	"pages": {
+		"home": {
+			"title": "Homepage",
+			"description": "Main page of the site"
+		},
+
+		"post": {
+			"title": "Post",
+			"description": "Base site entry"
+		}
+	}
+}
