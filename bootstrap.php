@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(E_ALL);
 
 session_start();
@@ -17,10 +16,15 @@ define("WWW_DIR", "http://{$_SERVER['HTTP_HOST']}" .substr($_SERVER['PHP_SELF'],
 /**
  * Путь к файлу с настройками
  */
-define("SETTINGS", WORKING_DIR .'/settings.ini');
+define("SETTINGS", WORKING_DIR .'/config/settings.ini');
 
 /**
- * Путь к файлам-классам с действиями 
+ * Путь к файлу с путями
+ */
+define("ROUTING", WORKING_DIR .'/config/routing');
+
+/**
+ * Путь к файлам-классам с действиями
  */
 define("ACTIONS_DIR", WORKING_DIR .'/lib/actions');
 
@@ -46,6 +50,12 @@ define("TEMPLATES_DIR", WORKING_DIR .'/templates');
 $settings = parse_ini_file(SETTINGS, true);
 
 /**
+ * Ассоциативный массив с навигация сайта
+ * @var array
+ */
+$routing =  json_decode(file_get_contents(ROUTING),true);
+
+/**
  * Функция автоподгрузки файлов с классам
  * @param string $N имя класса
  */
@@ -55,7 +65,7 @@ function __autoload($N) {
 		$ns = substr($N, 0, $backslash);
 		$N = substr($N, $backslash + 1);
 	}
-	
+
 	if (!isset($ns) && file_exists(WORKING_DIR ."/lib/{$N}.class.php"))
 		include_once(WORKING_DIR ."/lib/{$N}.class.php");
 	elseif (isset($ns) && $ns == 'Action' && file_exists(ACTIONS_DIR ."/{$N}.class.php"))

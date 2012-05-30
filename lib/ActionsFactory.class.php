@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
  * Абстрактный класс, описывающий действия пользователя
  * @author Роман Чаругин <roman-charugin@ya.ru>, Собканюк Андрей <4apay@mail.ru>
  */
@@ -25,5 +25,5 @@ abstract class ActionsFactory {
 		return new $action;
 	}
 }
-	
+
 ?>
